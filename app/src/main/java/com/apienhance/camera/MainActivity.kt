@@ -70,12 +70,13 @@ class MainActivity : ComponentActivity() {
                             providerFuture.addListener({
                                 val provider = providerFuture.get()
                                 val preview = Preview.Builder().build().also { it.surfaceProvider = view.surfaceProvider }
-                                imageCapture = ImageCapture.Builder()
+                                val captureUseCase = ImageCapture.Builder()
                                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                                     .build()
+                                imageCapture = captureUseCase
                                 try {
                                     provider.unbindAll()
-                                    provider.bindToLifecycle(this@MainActivity, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture)
+                                    provider.bindToLifecycle(this@MainActivity, CameraSelector.DEFAULT_BACK_CAMERA, preview, captureUseCase)
                                     message = "Ready — original photos save immediately"
                                 } catch (e: Exception) {
                                     message = "Camera error: ${e.localizedMessage}"
