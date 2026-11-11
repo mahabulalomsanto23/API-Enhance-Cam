@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import.provider.MediaStore
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
                                 try {
                                     provider.unbindAll()
                                     provider.bindToLifecycle(this@MainActivity, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture)
+                                    message = "Ready — original photos save immediately"
                                 } catch (e: Exception) {
                                     message = "Camera error: ${e.localizedMessage}"
                                 }
